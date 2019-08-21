@@ -1,0 +1,40 @@
+server:
+  port: 9411
+
+spring:
+  application:
+    name: zipkin-trace
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/ag_zipkin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+    continue-on-error: true
+  sleuth:
+    enabled: false
+
+zipkin:
+  storage:
+    type: mysql
+#  collector:
+#    rabbitmq:
+#      addresses: ${RABBIT_MQ_HOST:127.0.0.1}
+#      port: ${RABBIT_MQ_PORT:15672}
+#      password: guest
+#      username: guest
+#      queue: zipkin
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
